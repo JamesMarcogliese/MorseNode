@@ -3,6 +3,8 @@ Virtual Web Morse Code Station
 
 Node.js app written in JavaScript and HTML.
 
+Currently in development!
+
 GETTING STARTED
 ===============
 1. Install Node.js runtime on machine. (https://nodejs.org/)
