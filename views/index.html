@@ -11,59 +11,79 @@
    <input type="image" id="Clicker" src="/images/button.png">
    <img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
 
-   <div id="contents">centered at bottom</div>
-
-	
-   <textarea rows="10" cols="50" id="Ticker" readonly>
+   <textarea rows="10" cols="50" id="TickerIn" readonly>
+   </textarea>
+   
+   <textarea rows="10" cols="50" id="TickerOut" readonly>
    </textarea>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
   <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
   <script src='/javascripts/jquery.longclick-1.0.min.js' type='text/javascript'></script>
-  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src='/javascripts/howler.min.js' type='text/javascript'></script>
+  <script src='/javascripts/jquery.longclick-1.0.min.js' type='text/javascript'></script>
+  <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script type="text/javascript">
+	//Variables -----------------
 	var socket = io();
-	var myVar;
+	var spaceTimer;
 	
+	
+	
+	var dashTone = new Howl({
+		urls: ['/sounds/dashTone.mp3']
+	});
+
+	var dotTone = new Howl({
+		urls: ['/sounds/dotTone.mp3']
+	});
+	
+	//Fills the textArea with received data
 	function addText(elId,text) {
     document.getElementById(elId).value += text;
     }
 	
+	//Sends out a space character when called
 	function appendSpace() {
     socket.emit('morse signal', "/");
+	addText('TickerOut', "/");
     }
-	
+	//Distinguishes between clicks and long clicks and sends corresponding morse code. LongClick specified at 150ms.
 	$( document).ready( function() {
     $( '#Clicker').mayTriggerLongClicks( {
 	delay: 150
     } ).on( 'longClick', function() {
-	$( '#contents').html( 'Long-clicked on button ' + $( this).attr( 'id') );
 	socket.emit('morse signal', "-");
+	addText('TickerOut',"-");
     } ).on( 'click', function() {
-	$( '#contents').html( 'Short-clicked on button ' + $( this).attr( 'id') );
 	socket.emit('morse signal', ".");
+	addText('TickerOut',".");
     } );
 	
 	socket.on('morse signal', function(msg){
-	addText('Ticker',msg);
+	if (msg === "."){
+	dotTone.play();
+	} else if (msg === "-"){
+	dashTone.play();
+	}
+	addText('TickerIn',msg);
     });
 	
-
+	//Flashes the indicator light on and off as data is sent.
 	$('#Clicker').mousedown(function () {
     var src = "http://192.168.1.117:3000/images/lighton.png";
     $('#Light').attr("src", src);
-	clearTimeout(myVar);
+	clearTimeout(spaceTimer);
     return false;
     });
     $('#Clicker').mouseup(function () {
-    myVar = setTimeout(appendSpace, 500);
+    spaceTimer = setTimeout(appendSpace, 500);
     var src = "http://192.168.1.117:3000/images/lightoff.png";
     $("#Light").attr("src", src);
     return false;
     });
     $('#Clicker').mouseout(function () {
-
     var src = "http://192.168.1.117:3000/images/lightoff.png";
     $("#Light").attr("src", src);
     return false;

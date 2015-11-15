@@ -11,14 +11,15 @@ app.get('/', function(req, res){
 
 io.sockets.on('connection', function(socket){
   console.log('user connected.');
-  socket.on('morse signal', function(msg){
-    console.log('message: ' + msg);
-  });
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
   socket.on('morse signal', function(msg){
-    io.emit('morse signal', msg);
+	socket.broadcast.emit('morse signal', msg);
+    //io.emit('morse signal', msg);
+	console.log('message: ' + msg);
   });
 });
+
+var rooms = ['room1','room2','room3','room4','room5','room6'];
 
