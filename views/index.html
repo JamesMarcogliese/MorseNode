@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Virtual Morse Relay</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
-  <link rel='stylesheet' href='//fonts.googleapis.com/css?family=font1|font2|etc' type='text/css'>
+	<link rel="shortcut icon" href="favicon.ico" type="/images/hand256.png">
+  
   <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
   </head>
   <body>
@@ -12,10 +12,21 @@
    <img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
 
    <textarea rows="10" cols="50" id="TickerIn" readonly>
-   </textarea>
+   </textarea> 
    
    <textarea rows="10" cols="50" id="TickerOut" readonly>
    </textarea>
+   
+   <p>Select a Wire:</p>
+   <select name="Wires" id="Wires" size="5">
+    <option value="Alfa" Selected>Alfa</option>
+	<option value="Bravo">Bravo</option>
+	<option value="Charlie">Charlie</option>
+	<option value="Delta">Delta</option>
+	<option value="Echo">Echo</option>
+   </select>
+	
+   <button type="button" onclick="changeWire();">Join Wire</button> 
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
@@ -26,69 +37,95 @@
   <script src="/socket.io/socket.io.js" type="text/javascript"></script>
   <script type="text/javascript">
 	//Variables -----------------
+	//<link rel='stylesheet' href='//fonts.googleapis.com/css?family=font1|font2|etc' type='text/css'>
 	var socket = io();
 	var spaceTimer;
-	
-	
-	
+	var selectedWire;
+	var oldSelectedWire = "Alpha";
 	var dashTone = new Howl({
-		urls: ['/sounds/dashTone.mp3']
+		urls: ['/sounds/dashTone.ogg']
 	});
-
 	var dotTone = new Howl({
-		urls: ['/sounds/dotTone.mp3']
+		urls: ['/sounds/dotTone.ogg']
 	});
+	
+	//Gets the selection room from option box
+	function getSelectedText(elementId) {
+		var elt = document.getElementById(elementId);
+		if (elt.selectedIndex == -1)
+			return null;
+		return elt.options[elt.selectedIndex].text;
+	}
+	
+	//Changes selected room
+	function changeWire() {
+		selectedWire = getSelectedText('Wires');
+		if (selectedWire === null){
+		return;
+		}
+		if (selectedWire != oldSelectedWire) {
+			socket.emit("change wire", selectedWire);
+			oldSelectedWire = selectedWire;
+		}
+		document.getElementById('TickerIn').value = "";
+		document.getElementById('TickerOut').value = "";
+	}
 	
 	//Fills the textArea with received data
 	function addText(elId,text) {
-    document.getElementById(elId).value += text;
+		document.getElementById(elId).value += text;
     }
 	
 	//Sends out a space character when called
 	function appendSpace() {
-    socket.emit('morse signal', "/");
-	addText('TickerOut', "/");
+		//socket.to(selectedWire).emit("/");
+		socket.emit('send morse signal', "/");
+		addText('TickerOut', "/");
     }
+	
 	//Distinguishes between clicks and long clicks and sends corresponding morse code. LongClick specified at 150ms.
 	$( document).ready( function() {
     $( '#Clicker').mayTriggerLongClicks( {
-	delay: 150
+		delay: 150
     } ).on( 'longClick', function() {
-	socket.emit('morse signal', "-");
-	addText('TickerOut',"-");
+		socket.emit('send morse signal', "-");
+		addText('TickerOut',"-");
     } ).on( 'click', function() {
-	socket.emit('morse signal', ".");
-	addText('TickerOut',".");
+		socket.emit('send morse signal', ".");
+		addText('TickerOut',".");
     } );
 	
-	socket.on('morse signal', function(msg){
+	//Gets signal from server.
+	socket.on('receive morse signal', function(msg){
 	if (msg === "."){
-	dotTone.play();
-	} else if (msg === "-"){
-	dashTone.play();
-	}
-	addText('TickerIn',msg);
+		dotTone.play();
+		} else if (msg === "-"){
+			dashTone.play();
+		}
+		addText('TickerIn',msg);
     });
 	
 	//Flashes the indicator light on and off as data is sent.
 	$('#Clicker').mousedown(function () {
-    var src = "http://192.168.1.117:3000/images/lighton.png";
-    $('#Light').attr("src", src);
-	clearTimeout(spaceTimer);
-    return false;
+		var src = "http://192.168.1.117:3000/images/lighton.png";
+		$('#Light').attr("src", src);
+		clearTimeout(spaceTimer);
+		return false;
     });
     $('#Clicker').mouseup(function () {
-    spaceTimer = setTimeout(appendSpace, 500);
-    var src = "http://192.168.1.117:3000/images/lightoff.png";
-    $("#Light").attr("src", src);
-    return false;
+		spaceTimer = setTimeout(appendSpace, 500);
+		var src = "http://192.168.1.117:3000/images/lightoff.png";
+		$("#Light").attr("src", src);
+		return false;
     });
     $('#Clicker').mouseout(function () {
-    var src = "http://192.168.1.117:3000/images/lightoff.png";
-    $("#Light").attr("src", src);
-    return false;
+		var src = "http://192.168.1.117:3000/images/lightoff.png";
+		$("#Light").attr("src", src);
+		return false;
     });
+	
     });
+	//<div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
   </script>
    </body>
 </html>
