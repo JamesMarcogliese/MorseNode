@@ -17,7 +17,7 @@
    <textarea rows="10" cols="50" id="TickerOut" readonly>
    </textarea>
    
-   <p>Select a Wire:</p>
+   <p>Public Wires:</p>
    <select name="Wires" id="Wires" size="5">
     <option value="Alfa" Selected>Alfa</option>
 	<option value="Bravo">Bravo</option>
@@ -78,7 +78,6 @@
 	
 	//Sends out a space character when called
 	function appendSpace() {
-		//socket.to(selectedWire).emit("/");
 		socket.emit('send morse signal', "/");
 		addText('TickerOut', "/");
     }
