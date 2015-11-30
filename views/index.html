@@ -6,27 +6,54 @@
   
   <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
   </head>
-  <body>
+   <body>
   
-   <input type="image" id="Clicker" src="/images/button.png">
-   <img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
+    <input type="image" id="Clicker" src="/images/button.png">
+    <img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
 
-   <textarea rows="10" cols="50" id="TickerIn" readonly>
-   </textarea> 
+    <textarea rows="10" cols="50" id="TickerIn" readonly>
+    </textarea> 
    
-   <textarea rows="10" cols="50" id="TickerOut" readonly>
-   </textarea>
+    <textarea rows="10" cols="50" id="TickerOut" readonly>
+    </textarea>
    
-   <p>Public Wires:</p>
-   <select name="Wires" id="Wires" size="5">
+    <p>Public Wires:</p>
+    <select name="Wires" id="Wires" size="5">
     <option value="Alfa" Selected>Alfa</option>
 	<option value="Bravo">Bravo</option>
 	<option value="Charlie">Charlie</option>
 	<option value="Delta">Delta</option>
 	<option value="Echo">Echo</option>
-   </select>
+    </select>
 	
-   <button type="button" onclick="changeWire();">Join Wire</button> 
+    <button type="button" onclick="changeWire();">Join Wire</button> 
+   
+    <table id="wiretable" border="1" cellpadding="5" cellspacing="5">
+	<tr>
+	<th>Wire:</th>
+	<th>OPR Count:</th>
+	</tr>
+	<tr>
+	<td>Alpha</td>
+	<td>-</td>
+	</tr>
+	<tr>
+	<td>Bravo</td>
+	<td>-</td>
+	</tr>
+	<tr>
+	<td>Charlie</td>
+	<td>-</td>
+	</tr>
+	<tr>
+	<td>Delta</td>
+	<td>-</td>
+	</tr>
+	<tr>
+	<td>Echo</td>
+	<td>-</td>
+	</tr>
+	</table>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
@@ -48,6 +75,16 @@
 	var dotTone = new Howl({
 		urls: ['/sounds/dotTone.ogg']
 	});
+	var wiretable = document.getElementById('wiretable');
+	
+	//Populates the wire population table
+	socket.on('table update', function(wireCountArray){
+	wiretable.rows[1].cells[1].innerHTML = wireCountArray[0];
+	wiretable.rows[2].cells[1].innerHTML = wireCountArray[1];
+	wiretable.rows[3].cells[1].innerHTML = wireCountArray[2];
+	wiretable.rows[4].cells[1].innerHTML = wireCountArray[3];
+	wiretable.rows[5].cells[1].innerHTML = wireCountArray[4];
+    });
 	
 	//Gets the selection room from option box
 	function getSelectedText(elementId) {
