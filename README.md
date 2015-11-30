@@ -4,7 +4,7 @@ Virtual Web Morse Code Station
 Node.js app written in JavaScript and HTML.
 
 Currently in development!
-See the current state at morsenode-jclabs.rhcloud.com
+See the current state at http://morsenode-jclabs.rhcloud.com/
 
 GETTING STARTED
 ===============
