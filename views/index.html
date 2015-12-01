@@ -10,10 +10,11 @@
   
     <input type="image" id="Clicker" src="/images/button.png">
     <img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
-
+	
+	<p>Receiving Ticker</p>
     <textarea rows="10" cols="50" id="TickerIn" readonly>
     </textarea> 
-   
+    <p>Transmitting Ticker</p>
     <textarea rows="10" cols="50" id="TickerOut" readonly>
     </textarea>
    
@@ -72,8 +73,7 @@
 	//Variables -----------------
 	//<link rel='stylesheet' href='//fonts.googleapis.com/css?family=font1|font2|etc' type='text/css'>
 	var socket = io();
-	var spaceTimer;
-	var selectedWire;
+	var spaceTimer, selectedWire;
 	var oldSelectedWire = "Alpha";
 	var dashTone = new Howl({
 		urls: ['/sounds/dashTone.ogg']
@@ -82,6 +82,7 @@
 		urls: ['/sounds/dotTone.ogg']
 	});
 	var wiretable = document.getElementById('wiretable');
+	var $dashDelay, $characterDelay;
 	
 	//Populates the wire population table
 	socket.on('table update', function(wireCountArray){
@@ -125,10 +126,23 @@
 		addText('TickerOut', "/");
     }
 	
-	//Distinguishes between clicks and long clicks and sends corresponding morse code. LongClick specified at 150ms.
+	//Depending on mode selection, timings on transmission will change.
 	$( document).ready( function() {
+	var getSelectedMode = function() {
+	var selectedMode = $('input[name="mode"]:checked').val();
+	if (selectedMode === "Beginner"){
+	$dashDelay = 150;
+	$characterDelay = 500;
+	} else {
+	$dashDelay = 150;
+	$characterDelay = 150;
+	}}
+	getSelectedMode();
+	$( "input[type=radio]" ).on("click", getSelectedMode);
+	
+	//Distinguishes between clicks and long clicks and sends corresponding morse code. 
     $( '#Clicker').mayTriggerLongClicks( {
-		delay: 150
+		delay: $dashDelay
     } ).on( 'longClick', function() {
 		socket.emit('send morse signal', "-");
 		addText('TickerOut',"-");
@@ -155,7 +169,7 @@
 		return false;
     });
     $('#Clicker').mouseup(function () {
-		spaceTimer = setTimeout(appendSpace, 500);
+		spaceTimer = setTimeout(appendSpace, $characterDelay);
 		var src = "/images/lightoff.png";
 		$("#Light").attr("src", src);
 		return false;
