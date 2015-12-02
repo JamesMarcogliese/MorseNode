@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
 <title>Virtual Morse Relay</title>
@@ -7,20 +7,11 @@
 <body>
 	<div id="wrapper">
         <div id="header">
-            <p><input type="image" id="Title" src="/images/title.png"></p>
+            <p><input type="image" id="Title" alt="WebPageTitle" src="/images/title.png"></p>
         </div>
         <div id="content">
-		<input type="image" id="Clicker" src="/images/button.png">
-		<img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
-		
-		<p>Receiving Ticker</p>
-		<textarea rows="10" cols="50" id="TickerIn" readonly>
-		</textarea> 
-		<p>Transmitting Ticker</p>
-		<textarea rows="10" cols="50" id="TickerOut" readonly>
-		</textarea>
-	   
 		<p>Public Wires:</p>
+		
 		<select name="Wires" id="Wires" size="5">
 		<option value="Alfa" Selected>Alfa</option>
 		<option value="Bravo">Bravo</option>
@@ -30,8 +21,8 @@
 		</select>
 		
 		<button type="button" onclick="changeWire();">Join Wire</button> 
-	   
-		<table id="wiretable" border="1" cellpadding="5" cellspacing="5">
+		
+		<table id="wiretable">
 		<tr>
 		<th>Wire:</th>
 		<th>OPR Count:</th>
@@ -58,9 +49,19 @@
 		</tr>
 		</table>
 		
+		<p>Receiving Ticker</p>
+		<textarea rows="10" cols="40" id="TickerIn" wrap="hard" readonly></textarea> 
+		
+		<p>Transmitting Ticker</p>
+		<textarea rows="10" cols="40" id="TickerOut" wrap="hard" readonly></textarea>
+		
+		<input type="image" id="Clicker" alt="MorseClicker" src="/images/button.png">
+		<img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
+	   
 		<input type="radio" name="mode" value="Beginner" checked> Beginner
 		<br>
 		<input type="radio" name="mode" value="Advanced"> Advanced
+		
        </div>
     </div>
  
