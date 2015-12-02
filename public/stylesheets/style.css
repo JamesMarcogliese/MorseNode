@@ -1,5 +1,46 @@
 @charset "utf-8";
-body {
+@import url("reset.css");
 
+body {
+	/*
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color:#333
+	*/
+	background-image: url("/images/grey.png");
 }
 
+p {
+    padding: 10px;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 1080px;
+}
+
+#header {
+    float: left;
+    height: 75px;
+    width: 1080px;
+    background-color: transparent;
+}
+
+#content {
+    float: left;
+    background-color: transparent;
+    width: 1080px;
+}
+/*
+#leftcolumn {
+    background: #FFFFFF;
+    width: 100px;
+    float: left;
+}
+
+#rightcolumn {
+    background: #FFFFFF;
+    width: 100px;
+    float: left;
+}
+*/
