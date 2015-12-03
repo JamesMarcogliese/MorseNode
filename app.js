@@ -51,7 +51,7 @@ function updateRoomCount(oldRoom, newRoom) {
     case 'Delta':
         wireCountArray[3]--;
         break;
-    case 'Echo':
+    case 'Ben Affleck':
         wireCountArray[4]--;
         break;
 	}
@@ -68,7 +68,7 @@ function updateRoomCount(oldRoom, newRoom) {
     case 'Delta':
         wireCountArray[3]++;
         break;
-    case 'Echo':
+    case 'Ben Affleck':
         wireCountArray[4]++;
         break;
 	return;
