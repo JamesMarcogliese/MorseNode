@@ -7,64 +7,70 @@
 <body>
 	<div id="wrapper">
         <div id="header">
-            <p><input type="image" id="Title" alt="WebPageTitle" src="/images/title.png"></p>
+            <p><input type="image" id="title" alt="WebPageTitle" src="/images/title.png"></p>
         </div>
         <div id="content">
-		<p>Public Wires:</p>
-		
-		<select name="Wires" id="Wires" size="5">
-		<option value="Alfa" Selected>Alfa</option>
-		<option value="Bravo">Bravo</option>
-		<option value="Charlie">Charlie</option>
-		<option value="Delta">Delta</option>
-		<option value="Ben Affleck">Ben Affleck</option>
-		</select>
-		
-		<button type="button" onclick="changeWire();">Join Wire</button> 
-		
-		<table id="wiretable">
-		<tr>
-		<th>Wire:</th>
-		<th>OPR Count:</th>
-		</tr>
-		<tr>
-		<td>Alpha</td>
-		<td>-</td>
-		</tr>
-		<tr>
-		<td>Bravo</td>
-		<td>-</td>
-		</tr>
-		<tr>
-		<td>Charlie</td>
-		<td>-</td>
-		</tr>
-		<tr>
-		<td>Delta</td>
-		<td>-</td>
-		</tr>
-		<tr>
-		<td>Ben Affleck</td>
-		<td>-</td>
-		</tr>
-		</table>
-		
-		<p>Receiving Ticker</p>
-		<textarea rows="10" cols="40" id="TickerIn" wrap="hard" readonly></textarea> 
-		
-		<p>Transmitting Ticker</p>
-		<textarea rows="10" cols="40" id="TickerOut" wrap="hard" readonly></textarea>
-		
-		<input type="image" id="Clicker" alt="MorseClicker" src="/images/button.png">
-		<img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
-	   
-		<input type="radio" name="mode" value="Beginner" checked> Beginner
-		<br>
-		<input type="radio" name="mode" value="Advanced"> Advanced
-		
+			<div id="leftside">
+				<br>
+				<table id="wiretable" bgcolor="white">
+				<tr>
+				<th>Wire:</th>
+				<th>OPR Count:</th>
+				</tr>
+				<tr>
+				<td>Alpha</td>
+				<td>-</td>
+				</tr>
+				<tr>
+				<td>Bravo</td>
+				<td>-</td>
+				</tr>
+				<tr>
+				<td>Charlie</td>
+				<td>-</td>
+				</tr>
+				<tr>
+				<td>Delta</td>
+				<td>-</td>
+				</tr>
+				<tr>
+				<td>Ben Affleck</td>
+				<td>-</td>
+				</tr>
+				</table>
+				<br>
+				<select name="Wires" id="Wires" size="5">
+				<option value="Alfa" Selected>Alfa</option>
+				<option value="Bravo">Bravo</option>
+				<option value="Charlie">Charlie</option>
+				<option value="Delta">Delta</option>
+				<option value="Ben Affleck">Ben Affleck</option>
+				</select>
+				<button type="button" onclick="changeWire();">Join Wire</button> 
+				<br>
+				<br>
+				<br>
+				<p>Receiving Ticker</p>
+				<textarea rows="10" cols="40" id="TickerIn" wrap="hard" readonly></textarea> 
+			</div>
+			<div id="rightside">
+				<br>
+				<img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
+				<input type="image" id="Clicker" alt="MorseClicker" src="/images/button.png">
+				<br>
+				<br>
+				<input type="radio" name="mode" value="Beginner" checked> Beginner Mode
+				<br>
+				<input type="radio" name="mode" value="Advanced"> Advanced Mode
+				<br>
+				<br>
+				<br>
+				<br>
+				<p>Transmitting Ticker</p>
+				<textarea rows="10" cols="40" id="TickerOut" wrap="hard" readonly></textarea>
+			</div>
        </div>
     </div>
- 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
   <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>

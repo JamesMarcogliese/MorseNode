@@ -8,6 +8,9 @@ body {
     color:#333
 	*/
 	background-image: url("/images/grey.png");
+	padding: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12pt;
 }
 
 p {
@@ -27,32 +30,50 @@ p {
 }
 
 #content {
-    float: left;
     background-color: transparent;
     width: 1080px;
-}
-/*
-#leftcolumn {
-    background: #FFFFFF;
-    width: 100px;
-    float: left;
+	position:relative;
 }
 
-#rightcolumn {
-    background: #FFFFFF;
-    width: 100px;
-    float: left;
-}
-*/
-
-.wires {
-	position:static;
-}
-
-table {
+table,th,td {
 	border: 1px solid black;
-	padding: 5px;
-	border-spacing: 1px;
 }
 
+#leftside {
+	position: absolute;
+	left: 0px;
+	top: 100px;
+	width: 400px;
+	height: 500px;
+	background-color: rgb(221, 221, 221);
+	padding: 10px;
+	font-size: 12pt;
+	color: rgb(136, 136, 136);
+	text-align: center;
+	font-family: Verdana,Geneva,sans-serif;
+}
+
+#rightside {
+	position: absolute;
+	left: 500px;
+	top: 100px;
+	width: 400px;
+	height: 500px;
+	background-color: rgb(221, 221, 221);
+	padding: 10px;
+	font-size: 12pt;
+	color: rgb(136, 136, 136);
+	text-align: center;
+	font-family: Verdana,Geneva,sans-serif;
+}
+
+#wiretable {
+	position: relative;
+	left: 100px;
+}
+
+#TickerIn {
+	position: relative;
+	
+}
 
