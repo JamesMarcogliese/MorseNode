@@ -39,6 +39,15 @@
 			socket.emit("change wire", selectedWire);
 			oldSelectedWire = selectedWire;
 		}
+		if (selectedWire === 'Ben Affleck') {
+			var src = "/images/ben-affleck.jpg";
+			$('#legend').attr("src", src);
+		}
+		else {
+			var src = "/images/836px-Morse-code-tree.svg.png";
+			$('#legend').attr("src", src);
+		}
+		
 		document.getElementById('tickerIn').value = "";
 		document.getElementById('tickerOut').value = "";
 	}
