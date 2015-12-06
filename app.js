@@ -4,7 +4,7 @@ var socketio = require('socket.io');
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 app.use(express.static(__dirname + '/public'));
-var wireCountArray = [0,0,0,0,0];
+var wireCountArray = [0,0,0,0,0,0];
 
 //Sets up dir for static file retrieval.
 app.get('/', function(req, res){
@@ -51,8 +51,11 @@ function updateRoomCount(oldRoom, newRoom) {
     case 'Delta':
         wireCountArray[3]--;
         break;
-    case 'Ben Affleck':
+    case 'Echo':
         wireCountArray[4]--;
+        break;
+	case 'Ben Affleck':
+        wireCountArray[5]--;
         break;
 	}
 	switch (newRoom) {
@@ -68,8 +71,11 @@ function updateRoomCount(oldRoom, newRoom) {
     case 'Delta':
         wireCountArray[3]++;
         break;
-    case 'Ben Affleck':
+    case 'Echo':
         wireCountArray[4]++;
+        break;
+	case 'Ben Affleck':
+        wireCountArray[5]++;
         break;
 	return;
 	}

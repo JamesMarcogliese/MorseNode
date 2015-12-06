@@ -9,7 +9,7 @@
 	var dotTone = new Howl({
 		urls: ['/sounds/dotTone.ogg']
 	});
-	var wiretable = document.getElementById('wiretable');
+	var wiretable = document.getElementById('wireTable');
 	var $dashDelay, $characterDelay;
 	
 	//Populates the wire population table
@@ -31,7 +31,7 @@
 	
 	//Changes selected room
 	function changeWire() {
-		selectedWire = getSelectedText('Wires');
+		selectedWire = getSelectedText('wires');
 		if (selectedWire === null){
 		return;
 		}
@@ -39,8 +39,8 @@
 			socket.emit("change wire", selectedWire);
 			oldSelectedWire = selectedWire;
 		}
-		document.getElementById('TickerIn').value = "";
-		document.getElementById('TickerOut').value = "";
+		document.getElementById('tickerIn').value = "";
+		document.getElementById('tickerOut').value = "";
 	}
 	
 	//Fills the textArea with received data
@@ -51,7 +51,7 @@
 	//Sends out a space character when called
 	function appendSpace() {
 		socket.emit('send morse signal', "/");
-		addText('TickerOut', "/");
+		addText('tickerOut', "/");
     }
 	
 	//Depending on mode selection, timings on transmission will change.
@@ -69,14 +69,14 @@
 	$( "input[type=radio]" ).on("click", getSelectedMode);
 	
 	//Distinguishes between clicks and long clicks and sends corresponding morse code. 
-    $( '#Clicker').mayTriggerLongClicks( {
+    $( '#clicker').mayTriggerLongClicks( {
 		delay: $dashDelay
     } ).on( 'longClick', function() {
 		socket.emit('send morse signal', "-");
-		addText('TickerOut',"-");
+		addText('tickerOut',"-");
     } ).on( 'click', function() {
 		socket.emit('send morse signal', ".");
-		addText('TickerOut',".");
+		addText('tickerOut',".");
     } );
 	
 	//Gets signal from server.
@@ -86,25 +86,25 @@
 		} else if (msg === "-"){
 			dashTone.play();
 		}
-		addText('TickerIn',msg);
+		addText('tickerIn',msg);
     });
 	
 	//Flashes the indicator light on and off as data is sent.
-	$('#Clicker').mousedown(function () {
+	$('#clicker').mousedown(function () {
 		var src = "/images/lighton.png";
-		$('#Light').attr("src", src);
+		$('#light').attr("src", src);
 		clearTimeout(spaceTimer);
 		return false;
     });
-    $('#Clicker').mouseup(function () {
+    $('#clicker').mouseup(function () {
 		spaceTimer = setTimeout(appendSpace, $characterDelay);
 		var src = "/images/lightoff.png";
-		$("#Light").attr("src", src);
+		$("#light").attr("src", src);
 		return false;
     });
-    $('#Clicker').mouseout(function () {
+    $('#clicker').mouseout(function () {
 		var src = "/images/lightoff.png";
-		$("#Light").attr("src", src);
+		$("#light").attr("src", src);
 		return false;
     });
 	

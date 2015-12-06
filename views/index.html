@@ -11,64 +11,50 @@
         </div>
         <div id="content">
 			<div id="leftside">
-				<br>
-				<table id="wiretable" bgcolor="white">
-				<tr>
-				<th>Wire:</th>
-				<th>OPR Count:</th>
-				</tr>
-				<tr>
-				<td>Alpha</td>
-				<td>-</td>
-				</tr>
-				<tr>
-				<td>Bravo</td>
-				<td>-</td>
-				</tr>
-				<tr>
-				<td>Charlie</td>
-				<td>-</td>
-				</tr>
-				<tr>
-				<td>Delta</td>
-				<td>-</td>
-				</tr>
-				<tr>
-				<td>Ben Affleck</td>
-				<td>-</td>
-				</tr>
+				<table id="wireTable" bgcolor="white">
+				<tr><th>Wire:</th><th>OPR Count:</th></tr>
+				<tr><td>Alpha</td><td>-</td></tr>
+				<tr><td>Bravo</td><td>-</td></tr>
+				<tr><td>Charlie</td><td>-</td></tr>
+				<tr><td>Delta</td><td>-</td></tr>
+				<tr><td>Echo</td><td>-</td></tr>
 				</table>
-				<br>
-				<select name="Wires" id="Wires" size="5">
+				<select name="Wires" id="wires" size="5">
 				<option value="Alfa" Selected>Alfa</option>
 				<option value="Bravo">Bravo</option>
 				<option value="Charlie">Charlie</option>
 				<option value="Delta">Delta</option>
+				<option value="Echo">Echo</option>
 				<option value="Ben Affleck">Ben Affleck</option>
 				</select>
-				<button type="button" onclick="changeWire();">Join Wire</button> 
+				<button type="button" id="changeButton" onclick="changeWire();">Join Wire</button> 
 				<br>
-				<br>
-				<br>
-				<p>Receiving Ticker</p>
-				<textarea rows="10" cols="40" id="TickerIn" wrap="hard" readonly></textarea> 
+				<form>
+					<dl>
+						<dt><label for="tickerIn" id="tickerInLabel">Receiving Ticker</label>
+						<dd><textarea rows="10" cols="40" id="tickerIn" wrap="hard" readonly></textarea> 
+					</dl>
+				</form>
 			</div>
 			<div id="rightside">
-				<br>
-				<img src="/images/lightoff.png" id="Light" alt="LightBulb" width="50" height="50">
-				<input type="image" id="Clicker" alt="MorseClicker" src="/images/button.png">
-				<br>
-				<br>
-				<input type="radio" name="mode" value="Beginner" checked> Beginner Mode
-				<br>
-				<input type="radio" name="mode" value="Advanced"> Advanced Mode
-				<br>
-				<br>
-				<br>
-				<br>
-				<p>Transmitting Ticker</p>
-				<textarea rows="10" cols="40" id="TickerOut" wrap="hard" readonly></textarea>
+				<img src="/images/lightoff.png" id="light" alt="LightBulb" width="60" height="60">
+				<input type="image" id="clicker" alt="MorseClicker" src="/images/button.png">
+				<div id="modes">
+					<br>
+					<br>
+					<br>
+					<label style="white-space: nowrap;"> <input type="radio" name="mode" value="Beginner" checked />Beginner Mode    </label><br>
+					<label style="white-space: nowrap;"> <input type="radio" name="mode" value="Advanced"/>Advanced Mode   </label>
+				</div>
+				<form>
+					<dl>
+						<dt><label for="tickerOut">Transmitting Ticker</label>
+						<dd><textarea rows="10" cols="40" id="tickerOut" wrap="hard" readonly></textarea>
+					</dl>
+				</form>
 			</div>
+			<img src="/images/836px-Morse-code-tree.svg.png" id="legend" alt="MorseLegend">
+			<div class="block"></div>
        </div>
     </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>

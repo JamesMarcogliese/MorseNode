@@ -17,6 +17,19 @@ p {
     padding: 10px;
 }
 
+FORM {font-size: 0; }
+
+FORM DL {
+    display: inline-block;
+    font-size: 12pt;
+    vertical-align: top;
+    /*width: 200px;*/ /* Specify width if needed. */
+}
+
+table,th,td {
+	border: 1px solid black;
+}
+
 #wrapper {
     margin: 0 auto;
     width: 1080px;
@@ -35,16 +48,12 @@ p {
 	position:relative;
 }
 
-table,th,td {
-	border: 1px solid black;
-}
-
 #leftside {
 	position: absolute;
 	left: 0px;
 	top: 100px;
 	width: 400px;
-	height: 500px;
+	height: 330px;
 	background-color: rgb(221, 221, 221);
 	padding: 10px;
 	font-size: 12pt;
@@ -58,7 +67,7 @@ table,th,td {
 	left: 500px;
 	top: 100px;
 	width: 400px;
-	height: 500px;
+	height: 330px;
 	background-color: rgb(221, 221, 221);
 	padding: 10px;
 	font-size: 12pt;
@@ -67,13 +76,59 @@ table,th,td {
 	font-family: Verdana,Geneva,sans-serif;
 }
 
-#wiretable {
+.block {
+	position: absolute;
+	left: 400px;
+	top: 250px;
+	width: 100px;
+	height: 20px;
+	background-color: rgb(221, 221, 221);
+}
+
+#modes {
+	float: right;
+}
+#wireTable {
 	position: relative;
+	left: 10px;
+	top:20px;
+}
+
+#tickerIn {
+	position: relative;
+	top:-45px;
+}
+
+#tickerInLabel {
+	position: relative;
+	top:-45px;
+}
+
+#wires {
+	position: relative;
+	top: -75px;
+	left: 80px;
+}
+
+#changeButton {
+	position: relative;
+	top: -110px;
 	left: 100px;
 }
 
-#TickerIn {
+#light {
 	position: relative;
-	
+	top: -50px;
+	left: -20px;
 }
 
+#clicker {
+	position: relative;
+	left: 10px;
+}
+
+#legend {
+	position: relative;
+	top: 390px;
+	left: 40px;
+}
