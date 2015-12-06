@@ -98,6 +98,18 @@ table,th,td {
 #tickerIn {
 	position: relative;
 	top:-45px;
+	resize: none;
+	overflow: auto;
+	width: 300px;
+    height: 150px;
+}
+
+#tickerOut {
+	position: relative;
+	resize: none;
+	overflow: auto;
+	width: 300px;
+    height: 150px;
 }
 
 #tickerInLabel {
